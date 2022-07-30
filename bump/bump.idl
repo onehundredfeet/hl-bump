@@ -1,0 +1,4 @@
+
+interface BumpAllocator {
+    void BumpAllocator( int sizeInBytes );
+};
