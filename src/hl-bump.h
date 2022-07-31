@@ -19,7 +19,6 @@ struct BumpCompactArrayInternal {
 class BumpAllocatorInternal {
    private:
     uint8_t *_buffer;
-    hl_type *_type;
     int _allocated;
     int _size;
 
@@ -54,11 +53,14 @@ class BumpAllocatorInternal {
         return _allocated;
     }
 
+    void drainTo(int level) {
+        if (level < _allocated) {
+            _allocated = level;
+        }
+    }
     vdynamic *alloc(hl_type *at) {
         if (at->kind != HOBJ && at->kind != HSTRUCT)
             hl_error("Invalid bump type");
-
-        _type = at;
 
         hl_runtime_obj *rt = at->obj->rt;
         if (rt == NULL || rt->methods == NULL) rt = hl_get_obj_proto(at);
@@ -95,8 +97,6 @@ class BumpAllocatorInternal {
     void *allocCompactArray(hl_type *at, int count) {
         if (at->kind != HOBJ && at->kind != HSTRUCT)
             hl_error("Invalid compact type");
-
-        _type = at;
 
         hl_runtime_obj *rt = at->obj->rt;
         if (rt == NULL || rt->methods == NULL) rt = hl_get_obj_proto(at);

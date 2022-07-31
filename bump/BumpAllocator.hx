@@ -40,4 +40,12 @@ abstract BumpAllocator(Native.BumpAllocatorInternal) {
         return this.allocatedBytes();
     }
 
+    inline public function watermark() {
+        return this.allocatedBytes();
+    }
+
+    inline public function drainToWatermark(wm : Int) {
+        this.drainTo(wm);
+    }
+
 }

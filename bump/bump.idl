@@ -23,5 +23,6 @@ interface BumpAllocatorInternal {
 
     void clear();
     void dispose();
+    void drainTo(int bytes);
 };
 
