@@ -13,6 +13,7 @@ class BumpGenerator {
 #endif
 
 
+#include <hl.h>
 #include \"hl-bump.h\"
 ";
 	
