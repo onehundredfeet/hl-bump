@@ -298,12 +298,12 @@ HL_PRIM void HL_NAME(BumpAllocatorInternal_delete)( _ref(BumpAllocatorInternal)*
 }
 DEFINE_PRIM(_VOID, BumpAllocatorInternal_delete, _IDL);
 HL_PRIM vdynamic* HL_NAME(BumpArrayInternal_getAsDynamic2)(void* array, int element) {
-	return (getAsDynamic(array, element));
+	return (BumpArrayInternal_getAsDynamic(array, element));
 }
 DEFINE_PRIM(_DYN, BumpArrayInternal_getAsDynamic2, _BYTES _I32);
 
 HL_PRIM vdynamic* HL_NAME(BumpCompactArrayInternal_getAsDynamic2)(void* array, int element) {
-	return (getAsDynamic(array, element));
+	return (BumpCompactArrayInternal_getAsDynamic(array, element));
 }
 DEFINE_PRIM(_DYN, BumpCompactArrayInternal_getAsDynamic2, _BYTES _I32);
 

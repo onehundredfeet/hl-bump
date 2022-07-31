@@ -1,12 +1,13 @@
 
 [NoDelete]
 interface BumpArrayInternal {
-    [Static] dynamic getAsDynamic(VoidPtr array, int element);
+    [Static, Internal="BumpArrayInternal_getAsDynamic"] dynamic getAsDynamic(VoidPtr array, int element);
 };
 
 [NoDelete]
 interface BumpCompactArrayInternal {
-    [Static] dynamic getAsDynamic(VoidPtr array, int element);
+
+    [Static, Internal="BumpCompactArrayInternal_getAsDynamic"] dynamic getAsDynamic(VoidPtr array, int element);
 };
 
 interface BumpAllocatorInternal {
