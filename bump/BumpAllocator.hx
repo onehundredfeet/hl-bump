@@ -29,4 +29,15 @@ abstract BumpAllocator(Native.BumpAllocatorInternal) {
     inline public function dispose() {
         this.dispose();
     }
+
+    inline public function totalBytes() {
+        return this.totalBytes();
+    }
+    inline public function availableBytes() {
+        return this.availableBytes();
+    }
+    inline public function allocatedBytes() {
+        return this.allocatedBytes();
+    }
+
 }

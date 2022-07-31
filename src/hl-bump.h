@@ -36,6 +36,9 @@ class BumpAllocatorInternal {
     }
 
     inline uint8_t *allocRaw(int size) {
+        if (_allocated + size > _size) {
+            hl_error("Bump allocation %d exceeded capacity %d", size, _allocated);
+        }
         auto a = _allocated;
         _allocated += size;
         return &_buffer[a];
@@ -82,6 +85,7 @@ class BumpAllocatorInternal {
             *(void **)(((char *)out) + rt->fields_indexes[b->fid]) = b->closure ? hl_alloc_closure_ptr(b->closure, b->ptr, out) : b->ptr;
         }
 
+        //hl_warn("Allocated bump %s %d\n", at->abs_name, osize);
         return outDyn;
     }
 
@@ -90,7 +94,7 @@ class BumpAllocatorInternal {
     }
     void *allocCompactArray(hl_type *at, int count) {
         if (at->kind != HOBJ && at->kind != HSTRUCT)
-            hl_error("Invalid bump type");
+            hl_error("Invalid compact type");
 
         _type = at;
 
@@ -209,6 +213,11 @@ inline vdynamic *BumpArrayInternal_getAsDynamic(void *ptr, int index) {
 inline vdynamic *BumpCompactArrayInternal_getAsDynamic(void *ptr, int index) {
     BumpCompactArrayInternal *arr = (BumpCompactArrayInternal*)ptr;
 
+#ifndef BUMP_UNSAFE
+    if (index < 0 || index >= arr->count) {
+        hl_error("Index %d exceeds compact array count %d", index, arr->count);
+    }
+#endif
     if (arr->dynamics) {
         return &((vdynamic *)arr->dynamics)[index];
     }
