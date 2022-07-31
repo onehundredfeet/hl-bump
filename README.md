@@ -40,7 +40,7 @@ Keep in mind these are temporary
 These are akin to Hashlink's Native Array, but all can be built from the same bump allocator.
 
 ### Raw bytes
-You can simply allocate raw bytes using allocBytes().  Again, this will be temporary, but you will 
+You can simply allocate raw bytes using allocBytes().  Again, this will be temporary, but you will have to manage the lifetime of anything referencing these bytes.  This functionality is fantastic when preparing any kind of low level messages or datastructures to be passed and copied by a subsystem.
 
 ### Watermarking
 This is fairly unsafe, but can result in significant reduction in required buffer size.  You can ask for a watermark at any time. This will return the number of bytes allocated to this point.  You can then return the allocator to this state at any time using drainTo().  This will not drain past the watermarked location.  This allows you re-use later parts of the allocator while preserving earlier parts, reducing the need for explicit frees or unnecessarily large buffers.
@@ -78,7 +78,7 @@ Once that's done, you'll need to build the library.
 
 `cmake ..`
 
-Then when done, you now have a viably build directory. Run make (ideally make -j 20 for up to 20 threads)
+Then when done, you now have a viably build directory. Run make (ideally make -j 5 for up to 5 threads)
 
 `make` or `make -j XXX` where XXX is the number of threads you want
 
@@ -87,9 +87,14 @@ When that's done, it should output a bump.hdll in the build.debug directory.
 I would recommend, for development, using a soft link (if in a system that supports it), over copying so that it's easy to update.  But you can always copy it to the root of any Haxe project you want to use it in.  The hdll is necessary in addition to adding the -lib hl-bump to your .hxml.
 
 `cd ..`
+
 `ln -s build.debug/hl-bump`
 
 This will create a link in the root to the built library in the build.debug directory on unix-like systems.
+
+You will need to provide a path to the latest hl-idl.  One is referenced in this projects.
+
+`haxelib dev hl-idl ext/hl-idl` will set your hl-idl path to the right location.
 
 You can now compile the sample.
 
