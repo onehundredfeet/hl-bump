@@ -64,14 +64,18 @@ a.drainTo(wl); // resets the allocation to before Z was allocated
 You will need to get it from git and update submodules to get the IDL dependency.
 
 `git clone https://github.com/onehundredfeet/hl-bump.git`
+
 `cd hl-bump`
+
 `git submodule update --init --recursive`
 
 Once that's done, you'll need to build the library.  
 
 
 `mkdir build.debug`
+
 `cd build.debug`
+
 `cmake ..`
 
 Then when done, you now have a viably build directory. Run make (ideally make -j 20 for up to 20 threads)
