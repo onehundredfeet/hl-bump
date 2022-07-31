@@ -22,6 +22,7 @@ abstract BumpAllocator(Native.BumpAllocatorInternal) {
 	}
 
     inline public function allocBytes(  bytes : Int) {
+        throw "unimplemented";
     }
 
     inline public function  clear() {

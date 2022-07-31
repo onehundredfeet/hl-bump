@@ -36,10 +36,10 @@ Not all objects are supported yet, only Objects (Instances of a class) or Hashli
 
 Keep in mind these are temporary 
 
-### Fixed Arrays
-These are akin to Hashlink's Native Array, but all can be built from the same bump allocator.
+### Fixed Arrays (Unimplemented)
+These are akin to Hashlink's Native Array, but all can be built from the same bump allocator.  You can allocated arrays of primitive in fixed locations for use with external libraries.  Accessing on a per-element basis will require a functional call, which may make them slower for a lot of tight access than one directly supported by the jit, but for most, this will be negligable. 
 
-### Raw bytes
+### Raw bytes (Unimplemented)
 You can simply allocate raw bytes using allocBytes().  Again, this will be temporary, but you will have to manage the lifetime of anything referencing these bytes.  This functionality is fantastic when preparing any kind of low level messages or datastructures to be passed and copied by a subsystem.
 
 ### Watermarking
