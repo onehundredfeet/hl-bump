@@ -21,7 +21,7 @@ The allocator is fairly straight forward, but is still missing some features.
 
 
 ## Usage
-`
+```haxe
 var a = new bump.BumpAllocator( MAX_BYTES );
 
 var x = a.alloc(MyType); // Allocates a single instance
@@ -32,6 +32,4 @@ a.clear(); // effectively frees all allocations, or atleast consideres them inva
 var wl = a.watermark();
 var z = a.alloc(MyOtherType);
 a.drainTo(wl); // resets the allocation to before Z was allocated
-
-
-`
+```

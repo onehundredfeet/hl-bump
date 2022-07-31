@@ -284,6 +284,7 @@ inline static void _idc_copy_array( varray *dst, double *src,  int count) {
 #endif
 
 
+#include <hl.h>
 #include "hl-bump.h"
 
 
@@ -351,5 +352,10 @@ HL_PRIM void HL_NAME(BumpAllocatorInternal_dispose0)(_ref(BumpAllocatorInternal)
 	(_unref(_this)->dispose());
 }
 DEFINE_PRIM(_VOID, BumpAllocatorInternal_dispose0, _IDL);
+
+HL_PRIM void HL_NAME(BumpAllocatorInternal_drainTo1)(_ref(BumpAllocatorInternal)* _this, int bytes) {
+	(_unref(_this)->drainTo(bytes));
+}
+DEFINE_PRIM(_VOID, BumpAllocatorInternal_drainTo1, _IDL _I32);
 
 }
