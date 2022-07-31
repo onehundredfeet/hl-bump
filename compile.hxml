@@ -1,5 +1,5 @@
 -cp .
 --library hl-idl
 --hl bin/main.hl
--D hl-ver=1.13.0
+
 --main "tests.Main"

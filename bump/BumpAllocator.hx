@@ -21,6 +21,8 @@ abstract BumpAllocator(Native.BumpAllocatorInternal) {
 		return cast this.allocCompactArray( (cast cl:BaseType).__type__, count  );
 	}
 
+    inline public function allocBytes(  bytes : Int) {
+    }
 
     inline public function  clear() {
         this.clear();

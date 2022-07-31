@@ -1,0 +1,11 @@
+{
+	"name" : "hl-bump",
+	"url" : "https://github.com/onehundredfeet/hl-bump",
+	"license" : "MIT",
+	"contributors" : ["onehundredfeet"],
+	"description" : "Bump allocator support for Hashlink",
+	"version" : "0.1.0",
+	"releasenote" : "",
+	"classPath": ".",
+	"dependencies": { "hl-idl" : ""}
+}
