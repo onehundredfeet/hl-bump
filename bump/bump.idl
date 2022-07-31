@@ -1,4 +1,26 @@
 
-interface BumpAllocator {
-    void BumpAllocator( int sizeInBytes );
+[NoDelete]
+interface BumpArrayInternal {
+    [Static] dynamic getAsDynamic(VoidPtr array, int element);
 };
+
+[NoDelete]
+interface BumpCompactArrayInternal {
+    [Static] dynamic getAsDynamic(VoidPtr array, int element);
+};
+
+interface BumpAllocatorInternal {
+    void BumpAllocatorInternal( int sizeInBytes );
+
+    dynamic alloc( type t );
+    VoidPtr allocArray( type t, int count );
+    VoidPtr allocCompactArray( type t, int count );
+
+    int totalBytes();
+    int availableBytes();
+    int allocatedBytes();
+
+    void clear();
+    void dispose();
+};
+

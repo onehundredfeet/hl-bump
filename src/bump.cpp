@@ -292,14 +292,64 @@ inline static void _idc_copy_array( varray *dst, double *src,  int count) {
 
 extern "C" {
 
-static void finalize_BumpAllocator( _ref(BumpAllocator)* _this ) { free_ref(_this ); }
-HL_PRIM void HL_NAME(BumpAllocator_delete)( _ref(BumpAllocator)* _this ) {
+static void finalize_BumpAllocatorInternal( _ref(BumpAllocatorInternal)* _this ) { free_ref(_this ); }
+HL_PRIM void HL_NAME(BumpAllocatorInternal_delete)( _ref(BumpAllocatorInternal)* _this ) {
 	free_ref(_this );
 }
-DEFINE_PRIM(_VOID, BumpAllocator_delete, _IDL);
-HL_PRIM _ref(BumpAllocator)* HL_NAME(BumpAllocator_new1)(int sizeInBytes) {
-	return alloc_ref((new BumpAllocator(sizeInBytes)),BumpAllocator);
+DEFINE_PRIM(_VOID, BumpAllocatorInternal_delete, _IDL);
+HL_PRIM vdynamic* HL_NAME(BumpArrayInternal_getAsDynamic2)(void* array, int element) {
+	return (getAsDynamic(array, element));
 }
-DEFINE_PRIM(_IDL, BumpAllocator_new1, _I32);
+DEFINE_PRIM(_DYN, BumpArrayInternal_getAsDynamic2, _BYTES _I32);
+
+HL_PRIM vdynamic* HL_NAME(BumpCompactArrayInternal_getAsDynamic2)(void* array, int element) {
+	return (getAsDynamic(array, element));
+}
+DEFINE_PRIM(_DYN, BumpCompactArrayInternal_getAsDynamic2, _BYTES _I32);
+
+HL_PRIM _ref(BumpAllocatorInternal)* HL_NAME(BumpAllocatorInternal_new1)(int sizeInBytes) {
+	return alloc_ref((new BumpAllocatorInternal(sizeInBytes)),BumpAllocatorInternal);
+}
+DEFINE_PRIM(_IDL, BumpAllocatorInternal_new1, _I32);
+
+HL_PRIM vdynamic* HL_NAME(BumpAllocatorInternal_alloc1)(_ref(BumpAllocatorInternal)* _this, hl_type* t) {
+	return (_unref(_this)->alloc(t));
+}
+DEFINE_PRIM(_DYN, BumpAllocatorInternal_alloc1, _IDL _TYPE);
+
+HL_PRIM void* HL_NAME(BumpAllocatorInternal_allocArray2)(_ref(BumpAllocatorInternal)* _this, hl_type* t, int count) {
+	return (_unref(_this)->allocArray(t, count));
+}
+DEFINE_PRIM(_BYTES, BumpAllocatorInternal_allocArray2, _IDL _TYPE _I32);
+
+HL_PRIM void* HL_NAME(BumpAllocatorInternal_allocCompactArray2)(_ref(BumpAllocatorInternal)* _this, hl_type* t, int count) {
+	return (_unref(_this)->allocCompactArray(t, count));
+}
+DEFINE_PRIM(_BYTES, BumpAllocatorInternal_allocCompactArray2, _IDL _TYPE _I32);
+
+HL_PRIM int HL_NAME(BumpAllocatorInternal_totalBytes0)(_ref(BumpAllocatorInternal)* _this) {
+	return (_unref(_this)->totalBytes());
+}
+DEFINE_PRIM(_I32, BumpAllocatorInternal_totalBytes0, _IDL);
+
+HL_PRIM int HL_NAME(BumpAllocatorInternal_availableBytes0)(_ref(BumpAllocatorInternal)* _this) {
+	return (_unref(_this)->availableBytes());
+}
+DEFINE_PRIM(_I32, BumpAllocatorInternal_availableBytes0, _IDL);
+
+HL_PRIM int HL_NAME(BumpAllocatorInternal_allocatedBytes0)(_ref(BumpAllocatorInternal)* _this) {
+	return (_unref(_this)->allocatedBytes());
+}
+DEFINE_PRIM(_I32, BumpAllocatorInternal_allocatedBytes0, _IDL);
+
+HL_PRIM void HL_NAME(BumpAllocatorInternal_clear0)(_ref(BumpAllocatorInternal)* _this) {
+	(_unref(_this)->clear());
+}
+DEFINE_PRIM(_VOID, BumpAllocatorInternal_clear0, _IDL);
+
+HL_PRIM void HL_NAME(BumpAllocatorInternal_dispose0)(_ref(BumpAllocatorInternal)* _this) {
+	(_unref(_this)->dispose());
+}
+DEFINE_PRIM(_VOID, BumpAllocatorInternal_dispose0, _IDL);
 
 }
